@@ -28,12 +28,19 @@ RUN apk add git python3 make g++
 RUN yarn create restroom -a .
 
 # Configure restroom
-ENV HTTP_PORT=3000
-ENV HTTPS_PORT=3301
-ENV OPENAPI=true
+ARG HTTP_PORT=3000
+ENV HTTP_PORT=$HTTP_PORT
+ARG HTTPS_PORT=3301
+ENV HTTPS_PORT=$HTTPS_PORT
+ARG OPENAPI=true
+ENV OPENAPI=$OPENAPI
 ENV FILES_DIR=./contracts
 ENV CHAIN_EXT=chain
 ENV YML_EXT=yml
+
+ARG USER=zvmlet GROUP=zvmlet
+RUN addgroup -S "$GROUP" && adduser -SG"$GROUP" "$USER"
+USER "$USER"
 
 COPY src /app/contracts
 
