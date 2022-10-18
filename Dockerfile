@@ -35,5 +35,7 @@ ENV FILES_DIR=./contracts
 ENV CHAIN_EXT=chain
 ENV YML_EXT=yml
 
+COPY src /app/contracts
+
 # yarn install and run
 CMD yarn start
